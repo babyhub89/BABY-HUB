@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Baby Essentials Hub | Premium Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Poppins:wght@300;400;600;800&display=swap');
+        body { font-family: 'Poppins', sans-serif; background-color: #fffafb; color: #2d3436; overflow-x: hidden; }
+        
+        .header-bg { background: linear-gradient(to bottom, #1a1a2e, #16213e); padding: 45px 20px; text-align: center; color: #f1c40f; border-bottom: 5px solid #d4af37; }
+        
+        .gold-frame { border: 6px solid #d4af37; border-image: linear-gradient(45deg, #d4af37, #f1c40f, #996515) 1; box-shadow: 0 10px 25px rgba(0,0,0,0.2); position: relative; }
+        
+        .video-container { position: relative; width: 100%; padding-top: 125%; background: black; border-radius: 30px; overflow: hidden; margin-bottom: 20px; }
+        .video-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+
+        .slider-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; padding: 20px 10px; scrollbar-width: none; }
+        .slider-container::-webkit-scrollbar { display: none; }
+        .slide-card { min-width: 85%; scroll-snap-align: center; background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); border: 1px solid #eee; }
+
+        .product-card { background: white; border-radius: 20px; overflow: hidden; border: 1px solid #f0f0f0; padding: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); cursor: pointer; }
+        
+        .insta-scroll { background: linear-gradient(90deg, #996515, #f1c40f, #996515); color: #fff; font-weight: 900; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4); }
+        
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; }
+        .modal-content { background: white; width: 100%; max-width: 500px; height: 90vh; overflow-y: auto; border-radius: 30px 30px 0 0; position: relative; }
+        
+        .fixed-close { position: fixed; top: 20px; right: 20px; width: 45px; height: 45px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; z-index: 1100; box-shadow: 0 5px 20px rgba(0,0,0,0.3); cursor: pointer; color: black; }
+    </style>
+</head>
+<body>
+
+    <div id="globalClose" class="fixed-close" style="display: none;" onclick="closeModal()">✕</div>
+
+    <div class="header-bg">
+        <h1 style="font-family:'Playfair Display', serif;" class="text-3xl font-black uppercase tracking-wider">Baby Essentials Hub</h1>
+        <div class="w-24 h-0.5 bg-yellow-500 mx-auto my-3"></div>
+        <p class="text-[11px] uppercase tracking-[3px] font-bold text-white/90">Premium Quality Baby Products</p>
+    </div>
+
+    <div class="container mx-auto p-4 max-w-4xl">
+        
+        <div class="grid grid-cols-2 gap-4 mb-10 mt-6">
+            <div class="gold-frame rounded-xl overflow-hidden h-44"><img src="f1.jpg" class="w-full h-full object-cover"></div>
+            <div class="gold-frame rounded-xl overflow-hidden h-44"><img src="f2.jpg" class="w-full h-full object-cover"></div>
+        </div>
+
+        <div class="video-container gold-frame"><video playsinline autoplay muted loop><source src="v1.mp4"></video></div>
+        <div class="video-container gold-frame"><video playsinline autoplay muted loop><source src="v2.mp4"></video></div>
+
+        <div class="insta-scroll rounded-full py-5 text-center text-[12px] font-black tracking-widest my-10 cursor-pointer shadow-lg" onclick="window.open('https://www.instagram.com/baby_essentials_hub.00/')">
+            📜 VISIT INSTAGRAM FOR MORE DESIGNS 📜
+        </div>
+
+        <h2 class="text-2xl font-black mb-1 text-center text-gray-800">PREMIUM 8-PC COMBOS (₹1899)</h2>
+        <div class="slider-container mb-16">
+            <div class="slide-card" onclick="openMod('set1.jpg','Royal Combo Set 1','set','1899','8599')"><img src="set1.jpg" class="w-full h-[380px] object-cover"><div class="p-6 text-center"><h3 class="font-black">Premium Combo 1</h3><p class="text-red-600 font-bold">₹1899</p></div></div>
+            <div class="slide-card" onclick="openMod('set2.jpg','Royal Combo Set 2','set','1899','8599')"><img src="set2.jpg" class="w-full h-[380px] object-cover"><div class="p-6 text-center"><h3 class="font-black">Premium Combo 2</h3><p class="text-red-600 font-bold">₹1899</p></div></div>
+            <div class="slide-card" onclick="openMod('set3.jpg','Royal Combo Set 3','set','1899','8599')"><img src="set3.jpg" class="w-full h-[380px] object-cover"><div class="p-6 text-center"><h3 class="font-black">Premium Combo 3</h3><p class="text-red-600 font-bold">₹1899</p></div></div>
+            <div class="slide-card" onclick="openMod('set4.jpg','Royal Combo Set 4','set','1899','8599')"><img src="set4.jpg" class="w-full h-[380px] object-cover"><div class="p-6 text-center"><h3 class="font-black">Premium Combo 4</h3><p class="text-red-600 font-bold">₹1899</p></div></div>
+            <div class="slide-card" onclick="openMod('set5.jpg','Royal Combo Set 5','set','1899','8599')"><img src="set5.jpg" class="w-full h-[380px] object-cover"><div class="p-6 text-center"><h3 class="font-black">Premium Combo 5</h3><p class="text-red-600 font-bold">₹1899</p></div></div>
+            <div class="slide-card" onclick="openMod('set6.jpg','Royal Combo Set 6','set','1899','8599')"><img src="set6.jpg" class="w-full h-[380px] object-cover"><div class="p-6 text-center"><h3 class="font-black">Premium Combo 6</h3><p class="text-red-600 font-bold">₹1899</p></div></div>
+            <div class="slide-card" onclick="openMod('set7.jpg','Royal Combo Set 7','set','1899','8599')"><img src="set7.jpg" class="w-full h-[380px] object-cover"><div class="p-6 text-center"><h3 class="font-black">Premium Combo 7</h3><p class="text-red-600 font-bold">₹1899</p></div></div>
+            <div class="slide-card" onclick="openMod('set8.jpg','Royal Combo Set 8','set','1899','8599')"><img src="set8.jpg" class="w-full h-[380px] object-cover"><div class="p-6 text-center"><h3 class="font-black">Premium Combo 8</h3><p class="text-red-600 font-bold">₹1899</p></div></div>
+        </div>
+
+        <h2 class="text-2xl font-black mb-8 text-center text-gray-800 uppercase italic">Luxury Cradles (₹599)</h2>
+        <div class="grid grid-cols-2 gap-4 mb-16">
+            <div class="product-card" onclick="openMod('item17.jpg','Cradle Style A','single','599','1599')"><img src="item17.jpg" class="h-48 w-full object-cover rounded-xl"><p class="font-bold text-center mt-2">Style A designs</p></div>
+            <div class="product-card" onclick="openMod('item18.jpg','Cradle Style B','single','599','1599')"><img src="item18.jpg" class="h-48 w-full object-cover rounded-xl"><p class="font-bold text-center mt-2">Style B designs</p></div>
+        </div>
+
+        <h2 class="text-xl font-black mb-6 border-l-4 border-pink-500 pl-3">PREMIUM PILLOWS (₹599)</h2>
+        <div class="grid grid-cols-2 gap-4 mb-16">
+            <div class="product-card" onclick="openMod('item1.jpg','Pillow 1','single','599','1599')"><img src="item1.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+            <div class="product-card" onclick="openMod('item2.jpg','Pillow 2','single','599','1599')"><img src="item2.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+            <div class="product-card" onclick="openMod('item3.jpg','Pillow 3','single','599','1599')"><img src="item3.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+            <div class="product-card" onclick="openMod('item4.jpg','Pillow 4','single','599','1599')"><img src="item4.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+            <div class="product-card" onclick="openMod('item5.jpg','Pillow 5','single','599','1599')"><img src="item5.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+            <div class="product-card" onclick="openMod('item6.jpg','Pillow 6','single','599','1599')"><img src="item6.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+            <div class="product-card" onclick="openMod('item7.jpg','Pillow 7','single','599','1599')"><img src="item7.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+            <div class="product-card" onclick="openMod('item8.jpg','Pillow 8','single','599','1599')"><img src="item8.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+        </div>
+
+        <h2 class="text-xl font-black mb-6 border-l-4 border-pink-500 pl-3">BABY HOLDERS (₹599)</h2>
+        <div class="grid grid-cols-2 gap-4 mb-20">
+            <div class="product-card" onclick="openMod('item9.jpg','Holder 1','single','599','1599')"><img src="item9.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+            <div class="product-card" onclick="openMod('item10.jpg','Holder 2','single','599','1599')"><img src="item10.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+            <div class="product-card" onclick="openMod('item11.jpg','Holder 3','single','599','1599')"><img src="item11.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+            <div class="product-card" onclick="openMod('item12.jpg','Holder 4','single','599','1599')"><img src="item12.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+            <div class="product-card" onclick="openMod('item13.jpg','Holder 5','single','599','1599')"><img src="item13.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+            <div class="product-card" onclick="openMod('item14.jpg','Holder 6','single','599','1599')"><img src="item14.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+            <div class="product-card" onclick="openMod('item15.jpg','Holder 7','single','599','1599')"><img src="item15.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+            <div class="product-card" onclick="openMod('item16.jpg','Holder 8','single','599','1599')"><img src="item16.jpg" class="h-40 w-full object-cover rounded-xl"></div>
+        </div>
+
+        <div class="video-container gold-frame rounded-[50px] mb-10"><video playsinline autoplay muted loop><source src="order-now.mp4"></video></div>
+        
+        <p class="text-center text-gray-400 text-[10px] pb-10">© 2026 BABY ESSENTIALS HUB</p>
+    </div>
+
+    <div id="productModal" class="modal" onclick="closeModalOnOut(event)">
+        <div class="modal-content">
+            <img id="mainImg" src="" class="w-full h-[450px] object-cover">
+            <div class="p-8">
+                <h2 id="mTitle" class="text-2xl font-black text-gray-900 mb-2"></h2>
+                <span id="mPrice" class="text-red-600 font-black text-3xl block mb-6"></span>
+                <div id="mDesc" class="text-sm text-gray-500 mb-10 leading-relaxed bg-gray-50 p-5 rounded-2xl"></div>
+                <button onclick="window.open('https://www.instagram.com/baby_essentials_hub.00/')" class="w-full bg-black text-white font-black py-6 rounded-full text-lg uppercase shadow-2xl">Order on Instagram</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const setD = `<b>8-Pc Premium Combo Set</b><br>• High-Quality Fabric<br>• Includes Cradle, Pillows, Bed & more.<br>• Direct Factory Price.`;
+        const singleD = `<b>Luxury Baby Essential</b><br>• Soft & Skin-Friendly<br>• Durable & Washable<br>• Best Factory Quality.`;
+
+        function openMod(src, title, type, price, old) {
+            document.getElementById('mainImg').src = src;
+            document.getElementById('mTitle').innerText = title;
+            document.getElementById('mPrice').innerText = "₹" + price;
+            document.getElementById('mDesc').innerHTML = (type === 'set') ? setD : singleD;
+            document.getElementById('productModal').style.display = 'flex';
+            document.getElementById('globalClose').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').style.display = 'none';
+            document.getElementById('globalClose').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        function closeModalOnOut(e) { if(e.target.className === 'modal') closeModal(); }
+    </script>
+</body>
+</html>
