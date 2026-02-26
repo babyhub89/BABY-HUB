@@ -3,141 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baby Essentials Hub | Premium Store</title>
+    <title>Baby Essentials Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --navy: #0a192f; --gold: #c5a059; --bg: #f8f9fa; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); color: #333; overflow-x: hidden; }
+        :root { --navy: #0a192f; --gold: #c5a059; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f4f4; padding-bottom: 90px; }
+        .header { background: var(--navy); color: var(--gold); text-align: center; padding: 15px; border-bottom: 3px solid var(--gold); position: sticky; top:0; z-index: 100; }
+        .container { max-width: 480px; margin: auto; padding: 12px; background: white; }
         
-        /* 1. Branding Name */
-        .header { background: var(--navy); color: white; text-align: center; padding: 20px; border-bottom: 4px solid var(--gold); }
-        .header h1 { margin: 0; font-size: 22px; color: var(--gold); letter-spacing: 2px; }
+        /* Units f1, f2 */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .img-box { border: 2px solid var(--gold); border-radius: 8px; overflow: hidden; height: 140px; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        .container { max-width: 500px; margin: auto; padding: 15px; background: white; }
+        /* Factory Videos v1, v2 */
+        .v-box video { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 10px; background: #000; }
 
-        /* 2. Units Section (2 Photos) */
-        .units-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .unit-card { border: 2px solid var(--gold); border-radius: 10px; overflow: hidden; position: relative; }
-        .unit-card img { width: 100%; display: block; }
-        .unit-tag { position: absolute; bottom: 0; background: rgba(10,25,47,0.8); color: white; width: 100%; text-align: center; font-size: 10px; padding: 4px 0; }
+        .btn-insta { display: block; background: var(--navy); color: var(--gold); text-align: center; padding: 14px; border-radius: 8px; text-decoration: none; font-weight: bold; border: 1px solid var(--gold); margin: 15px 0; font-size: 13px; }
 
-        /* 3. Visit Instagram Button */
-        .insta-more-btn { display: block; background: var(--navy); color: var(--gold); text-align: center; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; border: 2px solid var(--gold); margin-bottom: 20px; }
-
-        /* 4. Factory Videos (4:5 Size) */
-        .factory-videos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-        .factory-videos video { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 10px; background: #000; }
-
-        /* 5. 8-Set Slider & Detailed Look */
-        .slider-section { position: relative; background: #fff; padding: 10px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 25px; }
-        .main-display-img { width: 100%; border-radius: 10px; margin-bottom: 10px; transition: 0.3s; }
+        /* Slider */
+        .slider-wrap { border: 1px solid #eee; padding: 10px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .price { font-size: 26px; color: #d32f2f; font-weight: bold; margin: 10px 0; }
+        .details-box { background: #fffcf0; padding: 12px; border-radius: 10px; font-size: 13px; border: 1px solid #f1e6bc; margin-bottom: 10px; }
         
-        .product-info { border-top: 1px solid #eee; padding-top: 10px; }
-        #setName { font-size: 19px; font-weight: bold; color: var(--navy); }
-        .price-box { display: flex; align-items: center; gap: 10px; margin: 10px 0; }
-        .new-p { font-size: 26px; color: #d32f2f; font-weight: 800; }
-        .old-p { text-decoration: line-through; color: #888; }
-        
-        /* FirstCry Theme Details */
-        .details-theme { background: #fdfaf0; border-radius: 10px; padding: 15px; margin-top: 10px; }
-        .item-list { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 12px; margin-bottom: 10px; }
-        .material-text { font-size: 13px; border-top: 1px solid #e0d5b5; padding-top: 8px; color: #555; }
+        .thumbs { display: flex; gap: 8px; overflow-x: auto; padding: 5px 0; scrollbar-width: none; }
+        .thumbs img { min-width: 65px; height: 65px; border-radius: 6px; border: 2px solid #eee; cursor: pointer; object-fit: cover; }
+        .thumbs img.active { border-color: var(--gold); }
 
-        .slider-nav { display: flex; overflow-x: auto; gap: 10px; padding: 10px 0; scrollbar-width: none; }
-        .nav-dot { min-width: 60px; height: 60px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; object-fit: cover; }
-        .nav-dot.active { border-color: var(--gold); }
+        /* Single Items */
+        .single-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .s-card { text-align: center; font-size: 11px; font-weight: bold; }
+        .s-card img { width: 100%; aspect-ratio: 1/1; border-radius: 50%; object-fit: cover; border: 1px solid #ddd; margin-bottom: 5px; }
 
-        /* 6. Single Items List */
-        .single-title { font-weight: bold; margin: 20px 0 10px; border-left: 4px solid var(--gold); padding-left: 10px; }
-        .single-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-        .single-item { text-align: center; font-size: 11px; cursor: pointer; }
-        .single-item img { width: 100%; border-radius: 8px; margin-bottom: 5px; border: 1px solid #eee; }
-
-        /* 7. Funny Video */
-        .funny-vid { width: 100%; border-radius: 15px; margin: 30px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-
-        /* Sticky Footer Button */
-        .sticky-btn { position: fixed; bottom: 10px; left: 10px; right: 10px; background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: white; text-align: center; padding: 15px; border-radius: 50px; text-decoration: none; font-weight: bold; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .book-now { position: fixed; bottom: 15px; left: 15px; right: 15px; background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); color: white; text-align: center; padding: 18px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 18px; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 200; }
     </style>
 </head>
 <body>
 
-    <div class="header"><h1>BABY ESSENTIALS HUB</h1></div>
+<div class="header"><h2 style="margin:0;">BABY ESSENTIALS HUB</h2></div>
 
-    <div class="container">
-        <div class="units-grid">
-            <div class="unit-card"><img src="factory1.jpg"><div class="unit-tag">OUR FACTORY</div></div>
-            <div class="unit-card"><img src="factory2.jpg"><div class="unit-tag">READY STOCK</div></div>
+<div class="container">
+    <div class="grid-2">
+        <div class="img-box"><img src="f1.jpg"></div>
+        <div class="img-box"><img src="f2.jpg"></div>
+    </div>
+
+    <a href="https://www.instagram.com/babyessentialshub" class="btn-insta">VISIT INSTAGRAM FOR MORE COLOURS</a>
+
+    <div class="grid-2 v-box">
+        <video src="v1.mp4" autoplay muted loop playsinline></video>
+        <video src="v2.mp4" autoplay muted loop playsinline></video>
+    </div>
+
+    <div class="slider-wrap">
+        <img id="main" src="set1.jpg" style="width:100%; border-radius:10px;">
+        <h3 id="title" style="margin:10px 0 5px; color:#0a192f; font-size:18px;">Beige Polka Dot Baby Nest Set</h3>
+        <div class="price">₹1899 <small style="text-decoration:line-through; color:#888; font-size:15px;">₹8599</small></div>
+        
+        <div class="details-box">
+            <b style="color:#856404;">8-Piece Premium Set Details:</b><br>
+            Mattress+Net, Sleeping Bag, Carry Nest, Wrapper, Pillow, 2 Bolsters. <br>
+            <span style="color:#666;">100% Breathable Cotton. Skin-friendly for newborns.</span>
         </div>
 
-        <a href="https://instagram.com/YOUR_HANDLE" class="insta-more-btn"><i class="fab fa-instagram"></i> VISIT INSTAGRAM FOR MORE COLOURS</a>
-
-        <div class="factory-videos">
-            <video src="v1.mp4" autoplay muted loop playsinline></video>
-            <video src="v2.mp4" autoplay muted loop playsinline></video>
+        <div class="thumbs">
+            <img src="set1.jpg" class="active" onclick="sel(this,'Beige Polka Dot Baby Nest Set')">
+            <img src="set2.jpg" onclick="sel(this,'Aqua Blue & White Newborn Essentials')">
+            <img src="set3.jpg" onclick="sel(this,'Grey & White Polka Dot Baby Set')">
+            <img src="set4.jpg" onclick="sel(this,'Premium Grey Maternity Set')">
+            <img src="set5.jpg" onclick="sel(this,'Sage Green Baby Bedding Set')">
+            <img src="set6.jpg" onclick="sel(this,'White & Red Baby Bedding Combo')">
+            <img src="set7.jpg" onclick="sel(this,'Soft Green & White Lounger')">
+            <img src="set8.jpg" onclick="sel(this,'Turquoise Blue & White Set')">
         </div>
+    </div>
 
-        <div class="slider-section">
-            <img id="mainSetImg" src="Set1.jpg" class="main-display-img">
-            <div class="product-info">
-                <div id="setName">Beige Polka Dot Baby Nest Set</div>
-                <div class="price-box">
-                    <span class="new-p">₹1899</span>
-                    <span class="old-p">₹8599</span>
-                    <span style="color: green; font-weight: bold;">(78% OFF)</span>
-                </div>
-                
-                <div class="details-theme">
-                    <div style="font-weight: bold; margin-bottom: 8px; font-size: 14px;">📦 8-Piece Set Includes:</div>
-                    <div class="item-list">
-                        <span>• Mattress with Net</span> <span>• Sleeping Bag</span>
-                        <span>• Carry Nest</span> <span>• Baby Wrapper</span>
-                        <span>• Head Pillow</span> <span>• 2 Side Bolsters</span>
-                        <span>• 1 Bonus Item</span>
-                    </div>
-                    <div class="material-text">
-                        <strong>Material:</strong> 100% Premium Breathable Cotton. Ultra-soft filling, feather-touch feel, skin-friendly for newborns.
-                    </div>
-                </div>
-            </div>
+    <h4 style="margin:25px 0 10px; border-left:4px solid var(--gold); padding-left:10px;">SINGLE ITEMS</h4>
+    <div class="single-grid">
+        <div class="s-card"><img src="mattress.jpg"><br>Mattress</div>
+        <div class="s-card"><img src="bag.jpg"><br>Sleeping Bag</div>
+        <div class="s-card"><img src="nest.jpg"><br>Carry Nest</div>
+    </div>
 
-            <div class="slider-nav" id="setNav">
-                <img src="Set1.jpg" class="nav-dot active" onclick="changeSet(1, 'Beige Polka Dot Baby Nest Set')">
-                <img src="Set2.jpg" class="nav-dot" onclick="changeSet(2, 'Aqua Blue and White Newborn Essentials')">
-                <img src="Set3.jpg" class="nav-dot" onclick="changeSet(3, 'Grey and White Polka Dot Baby Set')">
-                <img src="Set4.jpg" class="nav-dot" onclick="changeSet(4, 'Premium Grey Maternity & Newborn Set')">
-                <img src="Set5.jpg" class="nav-dot" onclick="changeSet(5, 'Sage Green Baby Bedding Set')">
-                <img src="Set6.jpg" class="nav-dot" onclick="changeSet(6, 'White and Red Baby Bedding Combo Set')">
-                <img src="Set7.jpg" class="nav-dot" onclick="changeSet(7, 'Soft Green & White Baby Lounger Collection')">
-                <img src="Set8.jpg" class="nav-dot" onclick="changeSet(8, 'Turquoise Blue and White Baby Bedding Set')">
-            </div>
-        </div>
+    <video src="funny.mp4" autoplay muted loop playsinline style="width:100%; border-radius:15px; margin-top:25px;"></video>
+</div>
 
-        <div class="single-title">SINGLE ITEMS COLLECTION</div>
-        <div class="single-grid">
-            <div class="single-item" onclick="alert('Details for Mattress')"><img src="mattress.jpg"><br>Baby Mattress</div>
-            <div class="single-item" onclick="alert('Details for Sleeping Bag')"><img src="bag.jpg"><br>Sleeping Bag</div>
-            <div class="single-item" onclick="alert('Details for Carry Nest')"><img src="nest.jpg"><br>Carry Nest</div>
-        </div>
+<a href="https://www.instagram.com/babyessentialshub" class="book-now">BOOK NOW ON INSTAGRAM</a>
 
-        <video src="funny.mp4" class="funny-vid" controls loop></video>
+<script>
+    function sel(el, txt) {
+        document.getElementById('main').src = el.src;
+        document.getElementById('title').innerText = txt;
+        document.querySelectorAll('.thumbs img').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+    }
+</script>
 
-        <div style="height: 80px;"></div> </div>
-
-    <a href="https://instagram.com/direct/t/YOUR_USER_ID" class="sticky-btn">
-        <i class="fab fa-instagram"></i> BOOK NOW ON INSTAGRAM
-    </a>
-
-    <script>
-        function changeSet(num, name) {
-            document.getElementById('mainSetImg').src = 'Set' + num + '.jpg';
-            document.getElementById('setName').innerText = name;
-            
-            // Highlight active thumbnail
-            let dots = document.querySelectorAll('.nav-dot');
-            dots.forEach(d => d.classList.remove('active'));
-            event.target.classList.add('active');
-        }
-    </script>
 </body>
 </html>
